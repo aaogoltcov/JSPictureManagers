@@ -1,1 +1,1 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/babt05gq7tx3y3au/branch/master?svg=true)](https://ci.appveyor.com/project/aaogoltcov/jsyarn/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/oueb02i326q28hhe?svg=true)](https://ci.appveyor.com/project/aaogoltcov/jspicturemanagers)

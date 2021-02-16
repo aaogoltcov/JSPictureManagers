@@ -17,14 +17,19 @@ export default class pictureManager {
   buttonClickEventListener() {
     this.button.addEventListener('click', event => {
       event.preventDefault();
-      if (this.checkURL(this.inputURL.value) && this.inputName.value) {
-        this.addPicture();
-        this.clearInputs();
-        this.removeMessage();
-      } else {
+      this.checkURLImage(this.inputURL.value).then(result => {
+        if (result === 'success' && this.inputName.value) {
+          this.addPicture();
+          this.clearInputs();
+          this.removeMessage();
+        } else {
+          this.clearInputs();
+          this.showMessage();
+        }
+      }, error => {
         this.clearInputs();
         this.showMessage();
-      }
+      });
     })
   }
 
@@ -38,8 +43,20 @@ export default class pictureManager {
     })
   }
 
-  checkURL(URL) {
-    return(URL.match(/\.(jpeg|jpg|gif|png)$/) != null);
+  checkURLImage(url) {
+    return new Promise(function(resolve, reject) {
+      let timeout = 5000;
+      let timer, img = new Image();
+      img.onerror = img.onabort = function() {
+        clearTimeout(timer);
+        reject("error");
+      };
+      img.onload = function() {
+        clearTimeout(timer);
+        resolve("success");
+      };
+      img.src = url;
+    });
   }
 
   addPicture() {
